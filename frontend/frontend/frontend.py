@@ -1,39 +1,43 @@
-"""Welcome to Reflex! This file outlines the steps to create a basic app."""
-
 import reflex as rx
 
-from rxconfig import config
-
-
-class State(rx.State):
-    """The app state."""
-
-    ...
+from frontend import style
+from frontend.state import SettingsState
+from frontend.components.settings import settings_icon
+from frontend.components.reset import reset
+from frontend.views.templates import templates
+from frontend.views.chat import chat, action_bar
 
 
 def index() -> rx.Component:
-    # Welcome Page (Index)
-    return rx.container(
-        rx.color_mode.button(position="top-right"),
-        rx.vstack(
-            rx.heading("Welcome to Reflex!", size="9"),
-            rx.text(
-                "Get started by editing ",
-                rx.code(f"{config.app_name}/{config.app_name}.py"),
-                size="5",
-            ),
-            rx.link(
-                rx.button("Check out our docs!"),
-                href="https://reflex.dev/docs/getting-started/introduction/",
-                is_external=True,
-            ),
-            spacing="5",
-            justify="center",
-            min_height="85vh",
+    return rx.theme(
+        rx.el.style(
+            f"""
+            :root {{
+                --font-family: "{SettingsState.font_family}", sans-serif;
+            }}
+        """
         ),
-        rx.logo(),
+        # Top bar with the reset and settings buttons
+        rx.box(
+            reset(),
+            settings_icon(),
+            class_name="top-4 right-4 absolute flex flex-row items-center gap-3.5",
+        ),
+        # Main content
+        rx.box(
+            # Prompt examples
+            templates(),
+            # Chat history
+            chat(),
+            # Action bar
+            action_bar(),
+            class_name="relative flex flex-col justify-between gap-20 mx-auto px-6 pt-16 lg:pt-6 pb-6 max-w-4xl h-screen",
+        ),
+        accent_color=SettingsState.color,
     )
 
 
-app = rx.App()
-app.add_page(index)
+app = rx.App(stylesheets=style.STYLESHEETS, style={"font_family": "var(--font-family)"})
+app.add_page(
+    index, title="Chatbot", description="A chatbot powered by Reflex and Langchain!"
+)

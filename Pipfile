@@ -9,10 +9,16 @@ openai = "*"
 langchain-core = "*"
 langchain-community = "*"
 langchain-experimental = "*"
-pymongo = "*"                                                    
+pymongo = "*"
 boto3 = "*"
 reflex = "*"
 scrapy = "*"
+black = "*"
+pydantic = "*"
+langchain-mongodb = "*"
+decouple = "*"
+langdetect = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 
