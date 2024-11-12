@@ -1,0 +1,9 @@
+langchain
+openai
+langchain-core
+langchain-community
+langchain-experimental
+pymongo
+boto3
+reflex
+scrapy
