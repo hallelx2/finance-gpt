@@ -5,7 +5,6 @@ from frontend.components.hint import hint
 
 
 def color_item(color: str) -> rx.Component:
-
     return rx.box(
         rx.box(
             rx.cond(

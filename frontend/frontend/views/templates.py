@@ -15,32 +15,32 @@ def template_card(icon: str, title: str, description: str, color: str) -> rx.Com
 def templates() -> rx.Component:
     return rx.box(
         rx.image(
-            src="/reflex_x_llamaindex.svg",
+            src="/langchain.svg",
             class_name="opacity-70 w-auto h-11 pointer-events-none",
         ),
         rx.box(
             template_card(
                 "message-circle",
-                "Ask a question",
-                "What is the capital of France?",
+                "Ask question on Investment Choice",
+                "What is the best company to invest in today?",
                 "grass",
             ),
             template_card(
                 "calculator",
-                "Solve a math problem",
-                "What is the square root of 144?",
+                "Choose a Stock",
+                "What is the Top stock in the Market?",
                 "tomato",
             ),
             template_card(
                 "globe",
                 "Get a fun fact",
-                "Tell me an interesting fact about dolphins.",
+                "Tell me an interesting fact about any stock of choice.",
                 "blue",
             ),
             template_card(
                 "book",
-                "Recommend a book",
-                "What's a good mystery novel for beginners?",
+                "Recommend a Stock",
+                "What's a good stock to invest in for beginners?",
                 "amber",
             ),
             class_name="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full",
