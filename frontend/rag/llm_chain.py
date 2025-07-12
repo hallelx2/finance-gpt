@@ -157,6 +157,7 @@ def retrieve_and_generate_response(
                         ticker=item["ticker"],
                         source=item["source"],
                         relevance_score=item.get("relevance_score", 0.0),
+                        url=item.get("url")
                     )
                 )
             response.top_news = structured_news

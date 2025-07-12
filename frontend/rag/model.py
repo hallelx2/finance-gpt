@@ -30,6 +30,7 @@ class NewsItem(BaseModel):
     source: str
     relevance_score: Optional[float] = None
     date: Optional[str] = None
+    url: Optional[str] = None
 
 
 class FinancialAnswer(BaseModel):
