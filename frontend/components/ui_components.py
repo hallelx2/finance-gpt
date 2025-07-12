@@ -87,6 +87,20 @@ class MessageComponent:
 
         for message in display_messages:
             MessageComponent.display_message(message)
+            # If assistant message with analysis metadata, render full analysis
+            if (
+                message.role == "assistant"
+                and message.metadata
+                and isinstance(message.metadata, dict)
+                and "summary" in message.metadata
+            ):
+                metadata = dict(message.metadata)
+                if "related_news" in metadata:
+                    metadata["top_news"] = metadata.pop("related_news")
+                if "sources" in metadata:
+                    del metadata["sources"]
+                from frontend.core.state_manager import AnalysisResult
+                AnalysisComponent.display_analysis_result(AnalysisResult(**metadata))
             st.markdown("---")
 
 
@@ -249,15 +263,19 @@ class AnalysisComponent:
 
     @staticmethod
     def _display_news_items(news_items: List[Dict[str, Any]]) -> None:
-        """Display news items in expandable format."""
+        """Display news items in expandable format with clickable links and preview if available."""
         for i, news in enumerate(news_items):
-            with st.expander(f"📰 {news.get('title', 'News Item')}"):
-                if "summary" in news:
-                    st.markdown(news["summary"])
-                if "url" in news:
-                    st.markdown(f"[Read Full Article]({news['url']})")
-                if "published_at" in news:
-                    st.caption(f"Published: {news['published_at']}")
+            title = news.get('title') or news.get('headline', 'News Item')
+            url = news.get('url')
+            summary = news.get('summary', '')
+            image = news.get('image') or news.get('thumbnail')
+            with st.expander(f"📰 {title}"):
+                if url:
+                    st.markdown(f"**[Read Full Article]({url})**")
+                if image:
+                    st.image(image, use_column_width=True)
+                if summary:
+                    st.markdown(summary)
 
 
 class InputComponent:
