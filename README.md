@@ -1,4 +1,5 @@
 # **Financial Market Insights RAG System**
+
 ## Overview
 
 ### Problem Statement
@@ -10,6 +11,7 @@ In the fast-paced world of finance, information changes by the minute. Investors
 Our solution is a **Real-Time Financial Market Insights Retrieval-Augmented Generation (RAG) System** that provides users with up-to-date answers to their finance-related questions, driven by the latest data scraped from reputable finance sources. By combining a robust RAG pipeline with a daily web scraping job, we ensure that the data used for insights is current and relevant.
 
 Here’s how the system works:
+
 - **Scraping and Data Storage**: Each day, a **Scrapy** job scrapes the latest financial data (e.g., stock prices, market news, company updates) from popular finance websites. This data is stored in **MongoDB Atlas**, which serves as a reliable storage for both raw data and vector embeddings.
 - **Embedding and Vector Search**: The scraped data is processed using **Amazon Bedrock embeddings**, which generate vector representations of the text data. These embeddings are stored in **MongoDB Atlas Vector Store**, allowing for fast, similarity-based retrieval of relevant information.
 - **RAG Pipeline for Real-Time Insights**: We use **LangChain** to orchestrate the retrieval-augmented generation process. When a user asks a question, LangChain searches the MongoDB Vector Store to find the most relevant recent information and uses **OpenAI** to generate a coherent answer based on that data.
@@ -18,6 +20,7 @@ Here’s how the system works:
 ### Benefits
 
 This RAG system empowers users to:
+
 - Access up-to-date financial insights tailored to their specific questions.
 - Make informed investment and business decisions based on the latest available data.
 - Gain a competitive advantage by staying informed in a rapidly changing market.
